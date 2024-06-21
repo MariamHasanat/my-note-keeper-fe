@@ -21,7 +21,7 @@ const CreateNewCard = () => {
 
     };
     return (
-        <Form autoComplete="off" form={form}>
+        <Form autoComplete="off" form={form} style={{ width: 300 }}>
             <Form.Item
                 label="Title"
                 name="title"
@@ -60,7 +60,7 @@ const CreateNewCard = () => {
 
                 }}>
                     Submit
-                </Button>
+                </Button> &nbsp;
                 <Button htmlType="button" onClick={(e) => {
                     e.preventDefault();
                     onReset();
