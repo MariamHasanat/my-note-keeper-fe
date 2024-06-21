@@ -1,45 +1,74 @@
 import React, { useState } from 'react'
 import setItems from './setItems'
+import { Button, Form, Input } from 'antd'
 
 
 const CreateNewCard = () => {
+    const [form] = Form.useForm();
     const [note, setNote] = useState({
         title: '',
         content: '',
         creationDate: null //Date.now()
     })
 
-    const clearInputs = () => {
+    const onReset = () => {
+        form.resetFields();
         setNote({
             title: '',
             content: '',
             creationDate: null
         })
-    
-    }
+
+    };
     return (
-        <form>
-            <input type='text' value={note.title} name='title' placeholder='ex: playing' onChange={(e) => setNote({ ...note, title: e.target.value })} />
-            <input type='text' value={note.content} name='content' placeholder='ex: play with sister' onChange={(e) => setNote({ ...note, content: e.target.value })} />
-            <button onClick={async (e) => {
-                e.preventDefault();
-                let date = Date.now();
-                await setNote(prev => ({ ...prev, creationDate: date }))
-                let jsonData = JSON.stringify(note);
-                setItems(jsonData)
-                console.log({ ...note, creationDate: date });
-                clearInputs();
-                
-            }}>save</button>
-            <button onClick={async (e) => {
-                e.preventDefault();
-                console.log(note);
-            }}>print</button>
-            <button onClick={(e)=>{
-                e.preventDefault();
-                clearInputs();
-            }}>cancel</button>
-        </form>
+        <Form autoComplete="off" form={form}>
+            <Form.Item
+                label="Title"
+                name="title"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input your title!',
+                        type: "text"
+                    },
+                ]}
+            >
+                <Input value={note.title} onChange={(e) => setNote({ ...note, title: e.target.value })} />
+            </Form.Item>
+            <Form.Item
+                label="Content"
+                name="content"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input your content!',
+                        type: "text"
+                    },
+                ]}
+            >
+                <Input value={note.content} onChange={(e) => setNote({ ...note, content: e.target.value })} />
+            </Form.Item>
+            <Form.Item>
+                <Button type="primary" htmlType="submit" onClick={async (e) => {
+                    e.preventDefault();
+                    let date = Date.now();
+                    await setNote(prev => ({ ...prev, creationDate: date }))
+                    let jsonData = JSON.stringify(note);
+                    setItems(jsonData)
+                    console.log({ ...note, creationDate: date });
+                    onReset();
+
+                }}>
+                    Submit
+                </Button>
+                <Button htmlType="button" onClick={(e) => {
+                    e.preventDefault();
+                    onReset();
+                }}>
+                    Cancel
+                </Button>
+            </Form.Item>
+        </Form>
     )
 }
 
