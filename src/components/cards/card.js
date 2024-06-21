@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import getItems from './getItems'
 import { Card, Col, Row } from "antd";
+import { DeleteOutlined } from '@ant-design/icons';
+import deleteNote from '../../services/deleteNote';
 
 const HandyCard = () => {
     const [notes, setNotes] = useState([]);
@@ -12,7 +14,7 @@ const HandyCard = () => {
     }, [])
 
     return (
-        <div style={{margin: 20}}> 
+        <div style={{ margin: 20 }} >
             <Row gutter={8}>
                 {
                     notes.map((note, key) => {
@@ -21,7 +23,14 @@ const HandyCard = () => {
                                 style={{
                                     width: 200,
                                     backgroundColor: `${"hsl(" + Math.random() * 360 + ", 100%, 75%)"}`
-                                }}>{note.content}</Card> </Col>
+                                }}>
+                                {note.content}
+                                <DeleteOutlined style={{position: 'absolute', bottom:10 , right:10}} onClick={async(e)=>{
+                                    e.preventDefault();
+                                   let deleted = await deleteNote(note._id);
+                                    console.log(deleted);
+                                }}/>
+                            </Card> </Col>
                         </div>
                     })
                 }
