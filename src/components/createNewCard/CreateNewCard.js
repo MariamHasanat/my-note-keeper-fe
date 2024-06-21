@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import setItems from './setItems'
 
 
 const CreateNewCard = () => {
@@ -24,6 +25,8 @@ const CreateNewCard = () => {
                 e.preventDefault();
                 let date = Date.now();
                 await setNote(prev => ({ ...prev, creationDate: date }))
+                let jsonData = JSON.stringify(note);
+                setItems(jsonData)
                 console.log({ ...note, creationDate: date });
                 clearInputs();
                 
