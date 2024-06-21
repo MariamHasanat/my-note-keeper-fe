@@ -20,7 +20,7 @@ const HandyCard = () => {
                             <Card title={note.title}
                                 style={{
                                     width: 200,
-                                    backgroundColor: `${"#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0")}`
+                                    backgroundColor: `${"hsl(" + Math.random() * 360 + ", 100%, 75%)"}`
                                 }}>{note.content}</Card> </Col>
                         </div>
                     })
