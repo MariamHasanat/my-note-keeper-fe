@@ -5,15 +5,16 @@ const setItems = async (data) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body : data
-        }).then(async(response)=>{
-        if (response.status === 200) {  
-          return response.json();
-        }
-        else {
-            throw new Error("Unexpected response status");
-          }
-        
+            body: data
+        }).then(async (response) => {
+            if (response.status === 200) {
+                console.log("success");
+                return await response.json();
+            }
+            else {
+                throw new Error("Unexpected response status");
+            }
+
         })
     } catch (error) {
         console.log("error in create new note");

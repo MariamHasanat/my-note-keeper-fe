@@ -1,9 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import getItems from '../../services/getItems'
+import { Card, Col, Row } from "antd";
 
-const Card = () => {
-  return (
-    <div>Card</div>
-  )
+const HandyCard = () => {
+    const [notes, setNotes] = useState([]);
+
+    useEffect(() => {
+        getItems().then((response => {
+            response.length > 0 ? setNotes(response) : setNotes([])
+        }));
+    }, [])
+    return (
+        <div style={{margin: 20}}> 
+            <Row gutter={8}>
+                {
+                    notes.map((note, key) => {
+                        return <div key={key}><Col span={8}>
+                            <Card title={note.title}
+                                style={{
+                                    width: 300,
+                                }}>{note.content}</Card> </Col>
+                        </div>
+                    })
+                }
+            </Row>
+        </div>
+    )
 }
 
-export default Card
+export default HandyCard
