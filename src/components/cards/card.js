@@ -10,6 +10,7 @@ const HandyCard = () => {
             response.length > 0 ? setNotes(response) : setNotes([])
         }));
     }, [])
+
     return (
         <div style={{margin: 20}}> 
             <Row gutter={8}>
@@ -18,7 +19,8 @@ const HandyCard = () => {
                         return <div key={key}><Col span={8}>
                             <Card title={note.title}
                                 style={{
-                                    width: 300,
+                                    width: 200,
+                                    backgroundColor: `${"#" + ((1 << 24) * Math.random() | 0).toString(16).padStart(6, "0")}`
                                 }}>{note.content}</Card> </Col>
                         </div>
                     })
