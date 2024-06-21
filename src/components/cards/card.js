@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import getItems from '../../services/getItems'
+import getItems from './getItems'
 import { Card, Col, Row } from "antd";
 
 const HandyCard = () => {
