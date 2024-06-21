@@ -1,6 +1,6 @@
 const setItems = async (data) => {
     try {
-        return fetch("url", {
+        return fetch("http://127.0.0.1:3001/notes/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
